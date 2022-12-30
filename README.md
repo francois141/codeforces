@@ -1,4 +1,4 @@
-# Codeforces submissions
+# Submissions
 
 <div align="center">
 
@@ -7,9 +7,9 @@
 
 </div>
 
-## Description of the project
+## Short description of the repo
 
-Add the description here
+You can have a look at all my submissions during the contests in 2023
 
 <div align="center">
 
