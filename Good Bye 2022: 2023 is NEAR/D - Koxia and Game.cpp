@@ -36,8 +36,6 @@ void unite(int a, int b){
     chef[a] = b;
 }
 
-
-
 void solve() {
     int n;
     cin >> n;
