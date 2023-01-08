@@ -1,8 +1,8 @@
 # Submissions
 
-You can have a look at all my submissions during the contests in 2023 [Codeforces](https://codeforces.com/)
-
 ![alt text](codeforces.jpeg)
+
+You can have a look at all my submissions during the contests in 2023 [Codeforces](https://codeforces.com/)
 
 ## Programming languages
 
