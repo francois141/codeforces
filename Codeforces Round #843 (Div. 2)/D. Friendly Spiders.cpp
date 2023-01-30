@@ -58,6 +58,7 @@ signed main() {
 	}
 
 	vector<bool> visitedPrime(3e5,false);
+	vector<bool> visited(n,false);
 	vector<int> prev(n,-1);
 
 	queue<int> q;
@@ -67,12 +68,14 @@ signed main() {
 	while(!q.empty()) {
 		auto idx = q.front();
 		q.pop();
+		visited[idx] = true;
 
 		for(auto p: decompositions[idx]) {
 			if(!visitedPrime[p]) {
 				visitedPrime[p] = true;
 				for(auto next : graph[p]) {
-					if(prev[next] == -1) {
+					if(!visited[next]) {
+						visited[next] = true;
 						q.push(next);
 						prev[next] = idx; 
 					}
