@@ -13,6 +13,7 @@ You can have a look at all my submissions during the contests in 2023 [Codeforce
 | ------------- |---------------------- |------------------|-----------------|
 | 2 Sat | Graph | [C++ code](./algorithms/two_sat.cpp) | [source](https://codeforces.com/blog/entry/92977) | 
 | Max flow | Graph | [C++ code](./algorithms/flow.cpp) | [source](https://cp-algorithms.com/graph/edmonds_karp.html) | 
+| Binomial | Combinatorics | [C++ code](./algorithms/binomial.cpp) | [source](https://cp-algorithms.com/combinatorics/binomial-coefficients.html) | 
 </div>
 
 ## Programming languages
