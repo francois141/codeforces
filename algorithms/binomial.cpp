@@ -2,7 +2,7 @@
 #define int long long 
 using namespace std;
 
-const int K = 998244353; // or 1e9 + 7
+const int K = 998244353; // or 1e9 + 7;
 
 inline int mult(int a,int b) {return ((a%K)*(b%K)) % K;}
 inline int add(int a,int b) {return ((a%K)+(b%K)) % K;}
