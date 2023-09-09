@@ -8,7 +8,6 @@ You can have a look at all my submissions during the contests in 2023 [Codeforce
 
 <div align="center">
 
-
 | Algorithm | Type | Code | Inspired from |
 | ------------- |---------------------- |------------------|-----------------|
 | 2 Sat | Graph | [C++ code](./algorithms/two_sat.cpp) | [source](https://codeforces.com/blog/entry/92977) | 
