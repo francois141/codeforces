@@ -6,7 +6,7 @@ int n;
 vector<int> a;
 vector<vector<int>> dp;
 
-map<vector<int>, int> cache;
+vector<int> righte;
 
 int compute(int from, int to) {
     if(from == to) return 1;
@@ -30,19 +30,20 @@ int compute(int from, int to) {
 
         // Both of them
         int left = INT_MAX;
-        vector<int> right;
-        right.push_back(compute(i+1, to));
+        righte[0] = compute(i+1, to);
+        int array_idx = 1;
         for(int j = max(i - a[i] + 1,from); j < i;j++) {
             // Get left
             left =  min(left, compute(from,j-1));
             // Get right
             int ridx = max(0ll, j + a[j] - i);
-            while(right.size() <= ridx)  {
-                right.push_back(compute(i + right.size(), to));
-                if(right.size() >= 2) right.back() = min(right.back(), right[right.size()-2]);
+            while(array_idx <= ridx)  {
+                righte[array_idx] = min(compute(i + array_idx, to), righte[array_idx-1]);
+                array_idx++;
             }
+
             // Combine
-            ans = min(ans, 2 + left + right[ridx]);
+            ans = min(ans, 2 + left + righte[ridx]);
         }
     }
 
@@ -55,14 +56,10 @@ void solve() {
     a = vector<int>(n);
     for(int i = 0; i < n;i++) cin >> a[i];
 
-    if(cache.find(a) != cache.end()) {
-        cout << cache[a] << "\n";
-        return;
-    }
-
     dp = vector<vector<int>>(n,vector<int>(n,-1));
 
-    cache[a] = compute(0,n-1);
+    righte = vector<int>(101,0);
+
     cout << compute(0, n-1) << "\n";
 }
 
