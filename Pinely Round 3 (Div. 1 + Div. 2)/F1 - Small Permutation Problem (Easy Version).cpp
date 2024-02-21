@@ -33,9 +33,9 @@ void solve() {
         if(a[i] == a[i-1]) {
             dp[i] = dp[i-1];
         } else if(a[i] == a[i-1] + 1) {
-            dp[i] = mult(dp[i-1],add(left+1,left));
+            dp[i] = mult(dp[i-1], add(left+1,left));
         } else {
-            dp[i] = mult(dp[i-1] , mult(left,left));
+            dp[i] = mult(dp[i-1], mult(left,left));
         }
     }
 
