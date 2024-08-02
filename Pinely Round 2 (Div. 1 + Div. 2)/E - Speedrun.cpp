@@ -70,12 +70,9 @@ void solve() {
     sort(s3.begin(), s3.end());
 
     pair<int,int> w = {INT_MAX, INT_MAX};
-    set<pair<int,int>> s2;
     for(auto e: s) {
         w = min(make_pair(-e.first, e.second.first), w);
     }
-
-    while(s2.size() > 1) s2.erase(prev(s2.end()));
     
     int answer = LLONG_MAX;
     while(!s3.empty()) {
