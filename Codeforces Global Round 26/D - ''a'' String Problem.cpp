@@ -70,16 +70,6 @@ void solve() {
         ne[i] = acc;
     }
 
-    /*cout << s << endl;
-    for(auto e: z_value) cout << e << " ";
-    cout << endl;
-
-    for(auto e: prev) cout << e << " ";
-    cout << endl;
-
-    for(auto e: ne) cout << e << " ";
-    cout << endl;*/
-
     int ans = 0;
     for(int i = 1; i <= n;i++) {
         bool ok = true;
