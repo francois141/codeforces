@@ -397,6 +397,47 @@ string remove_char(const string & s, char c) {
     return output;
 }
 
+
+class EulerTour {
+public:
+    int n;
+    std::vector<std::vector<int>> adj;
+
+    std::vector<int> tin, tout;
+    std::vector<int> euler;
+    int timer = 0;
+
+    EulerTour(const vector<vector<int>>& adj)
+        : n(adj.size()), adj(adj), tin(adj.size()), tout(adj.size()) {
+        build(1);
+    }
+
+    bool is_in_subtree(int u, int v) const {
+        return tin[v] <= tin[u] && tout[u] <= tout[v];
+    }
+private:
+    void dfs(int v, int parent) {
+        tin[v] = timer++;
+        euler.push_back(v);
+
+        for (int u : adj[v]) {
+            if (u == parent) continue;
+            dfs(u, v);
+        }
+
+        euler.push_back(v);
+
+        tout[v] = timer++;
+    }
+
+    void build(int root = 0) {
+        timer = 0;
+        euler.clear();
+        dfs(root, -1);
+    }
+};
+
+
 void solve() {
 
 #ifndef  ONLINE_JUDGE
