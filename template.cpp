@@ -1,5 +1,5 @@
 #ifdef ONLINE_JUDGE
-#include <bits/stdc++.h>
+    #include <bits/stdc++.h>
 #endif
 #include <iostream>
 #include <vector>
@@ -14,22 +14,18 @@
 #include <random>
 using namespace std;
 
-#define int long long
-
 const int K = 998244353; // or 1e9 + 7;
 
-inline int mult(int a,int b) {return (a*b) % K;}
-inline int add(int a,int b) {return (a+b) % K;}
+inline int mult(int a,int b) { return (a * b) % K; }
+inline int add(int a,int b) { return (a + b) % K; }
 
 vector<int> factorial;
 vector<int> inv_factorial;
 
-int binpow(int x, int y)
-{
+int binpow(int x, int y) {
     int z = 1;
-    while(y)
-    {
-        if(y & 1) z = mult(z, x);
+    while (y) {
+        if (y & 1) z = mult(z, x);
         x = mult(x, x);
         y >>= 1;
     }
@@ -37,7 +33,7 @@ int binpow(int x, int y)
 }
 
 int inverse(int a) {
-    return binpow(a,K-2);
+    return binpow(a, K - 2);
 }
 
 // Direct modular inverse (precomputed version)
@@ -47,25 +43,25 @@ inline int inv(int a) {
 
 // No longer needed if you use inv_factorial
 int divide(int a, int b) {
-    return mult(a,inverse(b));
+    return mult(a, inverse(b));
 }
 
 int binomial_coefficient(int n, int k) {
-    if(k < 0 || k > n) return 0;
-    return mult(factorial[n], mult(inv_factorial[k], inv_factorial[n-k]));
+    if (k < 0 || k > n) return 0;
+    return mult(factorial[n], mult(inv_factorial[k], inv_factorial[n - k]));
 }
 
 void computefactorial(int N) {
-    factorial = vector<int>(N+1,1);
-    inv_factorial = vector<int>(N+1,1);
+    factorial = vector<int>(N + 1, 1);
+    inv_factorial = vector<int>(N + 1, 1);
 
-    for(int i = 1; i <= N; i++) {
-        factorial[i] = mult(i, factorial[i-1]);
+    for (int i = 1; i <= N; i++) {
+        factorial[i] = mult(i, factorial[i - 1]);
     }
 
     inv_factorial[N] = inverse(factorial[N]); // compute inverse of N! once
-    for(int i = N; i > 0; i--) {
-        inv_factorial[i-1] = mult(inv_factorial[i], i);
+    for (int i = N; i > 0; i--) {
+        inv_factorial[i - 1] = mult(inv_factorial[i], i);
     }
 }
 
@@ -99,7 +95,7 @@ void dbg_out(Head H, Tail... T) {
 }
 
 #ifdef ONLINE_JUDGE
-#define dbg(...)
+    #define dbg(...)
 #else
 #define dbg(...) cerr << "(" << #__VA_ARGS__ << "):", dbg_out(__VA_ARGS__);
 #endif
@@ -124,30 +120,83 @@ using vpl = vector<pl>;
 using vpd = vector<pd>;
 using vii = vector<vi>;
 
-void fill_vi(vi &a) { for (int i = 0; i < a.size(); i++) cin >> a[i]; }
-void fill_vi1(vi &a) { for (int i = 1; i < a.size(); i++) cin >> a[i]; }
+vi fill_vi(int n) {
+    vi a = vector<int>(n);
+    for (int i = 0; i < a.size(); i++) cin >> a[i];
+    return a;
+}
+vi fill_vi1(int n) {
+    vi a = vector<int>(n+1);
+    for (int i = 1; i < a.size(); i++) cin >> a[i];
+    return a;
+}
 
-void fill_vpiidx(vpi &a) {
+vpi fill_vpiidx(int n) {
+    vpi a(n);
     for (int i = 0; i < a.size(); i++) cin >> a[i].first;
     for (int i = 0; i < a.size(); i++) a[i].second = i;
+    return a;
 }
 
-void fill_vpiidx1(vpi &a) {
+vpi fill_vpiidx1(int n) {
+    vpi a(n+1);
     for (int i = 1; i < a.size(); i++) cin >> a[i].first;
-    for (int i = 0; i < a.size(); i++) a[i].second = i;
+    for (int i = 1; i < a.size(); i++) a[i].second = i;
+    return a;
 }
 
-void fill_vii(vii &a) {
+vii fill_vii(int n, int m) {
+    vii a(n, vi(m));
     for (int i = 0; i < a.size(); i++) {
         for (int j = 0; j < a[i].size(); j++) cin >> a[i][j];
     }
+    return a;
 }
 
-void fill_vii1(vii &a) {
-    for (int i = 0; i < a.size(); i++) {
-        for (int j = 0; j < a[i].size(); j++) cin >> a[i][j];
+vii fill_vii1(int n, int m) {
+    vii a(n+1, vi(m+1));
+    for (int i = 1; i < a.size(); i++) {
+        for (int j = 1; j < a[i].size(); j++) cin >> a[i][j];
     }
+    return a;
 }
+
+vii fill_variable(int n) {
+    vii a(n);
+    for(int i = 0; i < n;i++) {
+        int x;
+        cin >> x;
+        a[i] = vi(x);
+        for(int j = 0; j < x;j++) cin >> a[i][j];
+    }
+    return a;
+}
+
+vii fill_graph(int n, int m) {
+    vii graph(n+1);
+    for(int i = 0; i < m;i++) {
+        int u,v;
+        cin >> u >> v;
+        graph[u].push_back(v);
+        graph[v].push_back(u);
+    }
+    return graph;
+}
+
+vii fill_tree(int n) {
+    return fill_graph(n,n-1);
+}
+
+vii fill_tree_parent(int n) {
+    vii graph(n+1);
+    for(int i = 2; i <=n;i++) {
+        int x;
+        cin >> x;
+        graph[x].push_back(i);
+    }
+    return graph;
+}
+
 
 template<class T>
 using pqg = priority_queue<T, vector<T>, greater<T> >;
@@ -181,10 +230,10 @@ const int dx[4] = {1, 0, -1, 0}, dy[4] = {0, 1, 0, -1};
 mt19937 rng((uint32_t) chrono::steady_clock::now().time_since_epoch().count());
 
 template<class T>
-int lwb(vector<T> &a, const T &b) { return int(lb(all(a), b) - bg(a)); }
+int lwb(vector<T> &a, const T &b) { return (lb(all(a), b) - bg(a)); }
 
 template<class T>
-int upb(vector<T> &a, const T &b) { return int(ub(all(a), b) - bg(a)); }
+int upb(vector<T> &a, const T &b) { return (ub(all(a), b) - bg(a)); }
 
 template<class t, class u>
 bool chmax(t &a, u b) {
@@ -222,19 +271,33 @@ vector<T> presum(vector<T> &v2) {
     return v;
 }
 
+// 1D flatten
 template<class T>
-void flatten(vector<T> &a) {
-    set<int> s;
-    for (auto &v: a)
-        s.insert(all(v));
+int flatten(vector<T> &a) {
+    set<T> s(a.begin(), a.end());
+    map<T, int> mp;
     int idx = 0;
-    map<int,int> mp;
-    for (auto e: s) {
+    for (auto e : s)
         mp[e] = idx++;
-    }
-    for (auto &e: a)
-        for (auto &e2: e)
-            e2 = mp[e2];
+    for (auto &e : a)
+        e = mp[e];
+    return idx;
+}
+
+// 2D flatten
+template<class T>
+int flatten(vector<vector<T>> &a) {
+    set<T> s;
+    for (auto &v : a)
+        s.insert(v.begin(), v.end());
+    map<T, int> mp;
+    int idx = 0;
+    for (auto e : s)
+        mp[e] = idx++;
+    for (auto &v : a)
+        for (auto &e : v)
+            e = mp[e];
+    return idx;
 }
 
 int getMSB(int num) {
@@ -397,6 +460,40 @@ string remove_char(const string & s, char c) {
     return output;
 }
 
+int build(int x, int first_value) {
+    int ans = 0;
+    int base = 1;
+
+    while (x > 0) {
+        int tmp = min(x, first_value);
+        x -= tmp;
+        ans += tmp * base;
+        base *= 10;
+
+        first_value = 9;
+    }
+
+    return ans;
+}
+
+inline int cnt(int x) {
+    int ans = 0;
+    while (x > 0) {
+        ans += x % 10;
+        x /= 10;
+    }
+    return ans;
+}
+
+int factor(int x) {
+    int ans = 0;
+    while(x > 0) {
+        ans++;
+        x /= 10;
+    }
+    return ans;
+}
+
 
 class EulerTour {
 public:
@@ -437,17 +534,37 @@ private:
     }
 };
 
+void print_indices(vii&sets, int x, int y) {
+    vector<int> indices;
+    for(int i = 0; i < sets.size();i++) {
+        int v1 = count(all(sets[i]), x);
+        int v2 = count(all(sets[i]), y);
+        if(v1 > 0 && v2 > 0)
+            indices.push_back(i+1);
+    }
 
+    cout << indices[0] << " " << indices[1] << "\n";
+}
+
+//  g++ main.cpp -std=c++20 -fsanitize=address -fno-omit-frame-pointer -g && ./a.out < input.txt
 void solve() {
-
-#ifndef  ONLINE_JUDGE
-    // Something to test
-#endif
 }
 
 signed main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
+
+    int t;
+    cin >> t;
+
+    while (t--)
+        solve();
+
+
+
+#ifndef ONLINE_JUDGE
+
+#endif
 
 
     return 0;
